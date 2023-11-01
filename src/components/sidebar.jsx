@@ -37,11 +37,11 @@ export default function SideBar({ user }){
             >
                 <section className="text-center mt-4">
                     <Image
-                        // src={avatar_url}
                         width={200}
                         height={200}
                         alt="Foto de perfil"
-                        src="/img/user-default.png"
+                        src={avatar_url}
+                        // src="/img/user-default.png"
                         style={{ borderRadius: '100%' }}
                     />
 
