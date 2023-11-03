@@ -41,8 +41,8 @@ export default function SideBar({ user }){
                         width={200}
                         height={200}
                         alt="Foto de perfil"
-                        // src={avatar_url}
-                        src="/img/user-default.png"
+                        src={avatar_url}
+                        // src="/img/user-default.png"
                         style={{ borderRadius: '100%' }}
                     />
 
@@ -111,8 +111,8 @@ export const SidebarMobile = ({ user, width }) => {
                         width={70}
                         height={70}
                         alt="Foto de perfil"
-                        // src={avatar_url}
-                        src="/img/user-default.png"
+                        src={avatar_url}
+                        // src="/img/user-default.png"
                         style={{ borderRadius: '100%' }}
                     />
                 </section>
