@@ -17,7 +17,7 @@ export default function RepoCard({ repositorio }) {
         <div style={{ position: 'relative', top: 0, left: 0, width: 345 }}>
             <Image width={345} height={140} alt="Banner" src="/img/logo/banner.jpg" />
 
-            <div style={{ top: 12, right: 12, position: 'absolute' }}>
+            <div style={{ top: 12, left: 12, position: 'absolute' }}>
                 <Image
                     width={0}
                     height={0}

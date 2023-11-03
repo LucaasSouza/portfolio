@@ -1,10 +1,11 @@
 // Components
-import SideBar from "@/components/sidebar";
+import SideBar, { SidebarMobile } from "@/components/sidebar";
 import RepoCard from "@/components/repoCard";
 import FunctionBody, { ConstBody, LetBody } from "@/components/functionBody";
 // JS, React e NextJS
 import axios from "axios";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export async function getServerSideProps(){
   const githubData = await Promise.all([
@@ -25,25 +26,31 @@ export async function getServerSideProps(){
 }
 
 export default function Home({ userData, repositories }){
-  return (
-    <>
-      <SideBar user={userData} />
+  const [windowWidth, setWindowWidth] = useState(0)
 
+  useEffect(() => { // Tamanho da tela atual
+    setWindowWidth(window.innerWidth)
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth))
+    return () => window.removeEventListener("resize", () => setWindowWidth(window.innerWidth))
+  }, [])
+
+  function ControlPage(){
+    return (
       <section
         style={{
           zIndex: 10,
-          marginLeft: 280,
+          marginLeft: windowWidth >= 790 ? 280 : 0,
           backgroundColor: '#313341',
           boxShadow: '0px 5px 10px 0px rgba(0,0,0,0.7)'
         }}
-        className="position-fixed w-100 text-white p-3"
+        className={`${windowWidth >= 790 ? 'position-fixed' : ''} w-100 text-white p-3`}
       >
         <Image
-          style={{ marginRight: 8 }}
-          src="/img/logo/javascript-banner.png"
           width={20}
           height={20}
           alt="Javascript logo"
+          style={{ marginRight: 8 }}
+          src="/img/logo/javascript-banner.png"
         />
 
         <span style={{ marginRight: 8 }}>
@@ -56,8 +63,24 @@ export default function Home({ userData, repositories }){
 
         <span style={{ borderLeft: '1px solid gray'}} />
       </section>
+    )
+  }
 
-      <div style={{ marginLeft: 300, paddingTop: 80 }} className="mb-4">
+  return (
+    <>
+      { windowWidth >= 790 ? <SideBar user={userData} /> : <SidebarMobile user={userData} width={windowWidth} /> }
+
+      {/* <SideBar user={userData} /> */}
+
+      { ControlPage() }
+
+      <div
+        style={{
+          marginLeft: windowWidth >= 790 ? 300 : 8,
+          paddingTop: windowWidth >= 790 ? 80 : 20
+        }}
+        className="mb-4"
+      >
         <main>
           <ConstBody
             nomeConst={'Eu'}
@@ -70,7 +93,7 @@ export default function Home({ userData, repositories }){
             ]}
           />
 
-          <br />
+          <br /><br />
 
           <FunctionBody
             funcao={'function'}
@@ -85,7 +108,7 @@ export default function Home({ userData, repositories }){
             </h5>
           </FunctionBody>
 
-          <br />
+          <br /><br />
 
           <LetBody
             nomeLet='ProjetosQueParticipei'
@@ -94,7 +117,7 @@ export default function Home({ userData, repositories }){
             }
             />
 
-          <br />
+          <br /><br />
 
           <FunctionBody
             funcao={'async function'}
@@ -104,11 +127,11 @@ export default function Home({ userData, repositories }){
             { repositories.map(rep => <RepoCard key={rep.id} repositorio={rep} />) }
           </FunctionBody>
 
-          <br />
+          <br /><br />
 
           <FunctionBody
             funcao={'function'}
-            nomeFuncao={'MinhaVisaoSobreMinhaProfissaoNoFuturo'}
+            nomeFuncao={'MinhaProfissaoNoFuturo'}
             comentario={'O que eu acho que irá acontecer com a profissão de desenvolvedor web no futuro'}
           >
             <h5 style={{ color: '#F1FA8C' }} className="m-0">
@@ -118,6 +141,10 @@ export default function Home({ userData, repositories }){
               ante ipsum primis in faucibus."
             </h5>
           </FunctionBody>
+
+          <section>
+            Desenvolvido por Lucas Souza
+          </section>
         </main>
       </div>
     </>
