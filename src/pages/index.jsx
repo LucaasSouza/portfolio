@@ -70,8 +70,6 @@ export default function Home({ userData, repositories }){
     <>
       { windowWidth >= 790 ? <SideBar user={userData} /> : <SidebarMobile user={userData} width={windowWidth} /> }
 
-      {/* <SideBar user={userData} /> */}
-
       { ControlPage() }
 
       <div
@@ -142,8 +140,12 @@ export default function Home({ userData, repositories }){
             </h5>
           </FunctionBody>
 
-          <section>
-            Desenvolvido por Lucas Souza
+          <section className="text-end px-4" style={{ color: '#F8F8F2' }}>
+            <hr />
+
+            <p className="mt-2 mb-0 p-0">
+              Desenvolvido por Lucas Souza
+            </p>
           </section>
         </main>
       </div>

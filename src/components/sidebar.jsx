@@ -38,11 +38,11 @@ export default function SideBar({ user }){
             >
                 <section className="text-center mt-4">
                     <Image
-                        src={avatar_url}
                         width={200}
                         height={200}
                         alt="Foto de perfil"
-                        // src="/img/user-default.png"
+                        // src={avatar_url}
+                        src="/img/user-default.png"
                         style={{ borderRadius: '100%' }}
                     />
 
@@ -83,7 +83,7 @@ export default function SideBar({ user }){
 }
 
 export const SidebarMobile = ({ user, width }) => {
-    const { avatar_url, login, bio, html_url } = user
+    const { avatar_url, login, html_url } = user
 
     const redesSociais = [
         {
@@ -105,36 +105,32 @@ export const SidebarMobile = ({ user, width }) => {
 
     return (
         <>
-            <div
-                style={{ color: '#F8F8F2' }}
-                className={`p-2 d-flex justify-content-between ${width < 500 ? 'flex-column text-center' : ''}`}
-            >
-                <section>
-                    <h5 className='m-0 py-2'>
-                        Lucas Souza • PortFólio
-                    </h5>
+            <div style={{ color: '#F8F8F2' }} className={`p-2 d-flex justify-content-between`}>
+                <section className='p-1'>
+                    <Image
+                        width={70}
+                        height={70}
+                        alt="Foto de perfil"
+                        // src={avatar_url}
+                        src="/img/user-default.png"
+                        style={{ borderRadius: '100%' }}
+                    />
                 </section>
 
-                <section>
-                    <Dropdown>
-                        <Dropdown.Toggle
-                            id="dropdown-basic"
-                            style={{
-                                backgroundColor: 'transparent',
-                                border: 'none',
-                                borderRadius: 0,
-                                borderBottom: '1px solid #F8F8F2'
-                            }}
-                        >
-                            Redes Sociais
-                        </Dropdown.Toggle>
+                <section className='d-flex flex-column'>
+                    <h5 className='m-0 py-2'>
+                        @{login} • PortFólio
+                    </h5>
 
-                        <Dropdown.Menu>
-                            {
-                                redesSociais.map(r => <Dropdown.Item key={r.legend} href={r.link} target='_blank'> {r.icon} &nbsp; {r.legend} </Dropdown.Item>)
-                            }
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <section className='text-end'>
+                        {
+                            redesSociais.map(r => (
+                                <Link key={r.legend} href={r.link} target="_blank" style={{ color: '#F8F8F2', marginLeft: 8 }}>
+                                    { r.icon }
+                                </Link>
+                            ))
+                        }
+                    </section>
                 </section>
             </div>
 
