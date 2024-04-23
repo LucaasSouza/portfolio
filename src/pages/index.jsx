@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export async function getServerSideProps(){
-  const githubData = await Promise.all([
+  const githubData = await Promise.all([ // Lista de requisições
     axios.get('https://api.github.com/users/LucaasSouza'),
     axios.get('https://api.github.com/users/LucaasSouza/repos?sort=author-date-asc')
   ])
